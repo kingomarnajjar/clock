@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Analog Clock with Confetti and Snow</title>
+    <style>
+        body, html {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: white; /* Background color */
+            margin: 0;
+            overflow: hidden; /* Prevent scrolling when clicking */
+        }
+
+        .clock-container {
+            position: relative;
+            width: 400px; /* Width for the silhouette */
+            height: 600px; /* Height for the silhouette */
+            overflow: hidden; /* Hide overflow */
+        }
+
+        .silhouette {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; /* Cover the area of the container */
+            z-index: 1; /* Ensure it appears behind other elements */
+        }
+
+        .hand {
+            position: absolute;
+            background: black;
+            transform-origin: bottom;
+            border-radius: 5px; /* Rounded edges for hands */
+            z-index: 3; /* Ensure it appears above everything else */
+        }
+
+        .hour-hand {
+            width: 8px;
+            height: 70px;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .minute-hand {
+            width: 6px;
+            height: 90px;
+            bottom: 50%;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .second-hand {
+            width: 4px;
+            height: 100px;
+            bottom: 50%;
+            left: 50%;
+            background: red;
+            transform: translateX(-50%);
+        }
+    </style>
+    <script src="https://cdn.jsdelivr.net/npm/tsparticles-confetti@2.11.0/tsparticles.confetti.bundle.min.js"></script>
+</head>
+<body>
+
+    <div class="clock-container">
+        <!-- Add your silhouette image link here -->
+        <img src="https://i.etsystatic.com/14161614/r/il/6d376b/1616167775/il_1588xN.1616167775_du3n.jpg" alt="Silhouette" class="silhouette">
+        
+        <div class="hand hour-hand" id="hour-hand"></div>
+        <div class="hand minute-hand" id="minute-hand"></div>
+        <div class="hand second-hand" id="second-hand"></div>
+    </div>
+
+    <script>
+        const hourHand = document.getElementById('hour-hand');
+        const minuteHand = document.getElementById('minute-hand');
+        const secondHand = document.getElementById('second-hand');
+
+        // Update the clock hands every second
+        function updateClock() {
+            const now = new Date();
+            const seconds = now.getSeconds();
+            const minutes = now.getMinutes();
+            const hours = now.getHours() % 12;
+
+            const secondDeg = seconds * 6; // 360 degrees / 60 seconds
+            const minuteDeg = minutes * 6 + seconds * 0.1; // 360 degrees / 60 minutes
+            const hourDeg = hours * 30 + minutes * 0.5; // 360 degrees / 12 hours
+
+            secondHand.style.transform = `translateX(-50%) rotate(${secondDeg}deg)`;
+            minuteHand.style.transform = `translateX(-50%) rotate(${minuteDeg}deg)`;
+            hourHand.style.transform = `translateX(-50%) rotate(${hourDeg}deg)`;
+        }
+
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Confetti effect every 6 seconds
+        setInterval(() => {
+            confetti({
+                spread: 360,
+                ticks: 200,
+                gravity: 1,
+                decay: 0.94,
+                startVelocity: 30,
+                particleCount: 100,
+                scalar: 5,
+                shapes: ["image"],
+                shapeOptions: {
+                    image: [{
+                        src: "https://particles.js.org/images/fruits/apple.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/avocado.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/banana.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/berries.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/cherry.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/grapes.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/lemon.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/orange.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/peach.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/pear.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/pepper.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/plum.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/star.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/strawberry.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/watermelon.png",
+                        width: 32,
+                        height: 32,
+                    },
+                    {
+                        src: "https://particles.js.org/images/fruits/watermelon_slice.png",
+                        width: 32,
+                        height: 32,
+                    }],
+                },
+            });
+        }, 6000); // 6000 milliseconds = 6 seconds
+
+        // Snow effect on click
+        document.body.addEventListener('click', (event) => {
+            const duration = 10 * 1000; // Reduced duration
+            const animationEnd = Date.now() + duration;
+
+            function randomInRange(min, max) {
+                return Math.random() * (max - min) + min;
+            }
+
+            (function frame() {
+                const timeLeft = animationEnd - Date.now(),
+                      ticks = Math.max(100, 300 * (timeLeft / duration)); // Increased speed
+
+                // Create snow effect in a smaller area
+                const offsetX = randomInRange(-50, 50); // +/- 50 pixels horizontally
+                const offsetY = randomInRange(-20, 20); // +/- 20 pixels vertically
+
+                confetti({
+                    angle: randomInRange(55, 125), // Random angle for direction
+                    spread: randomInRange(50, 70), // Random spread
+                    particleCount: randomInRange(50, 100), // Random particle count
+                    origin: {
+                        x: (event.clientX + offsetX) / window.innerWidth, // Adjusted position
+                        y: (event.clientY + offsetY) / window.innerHeight // Adjusted position
+                    },
+                    colors: ["#ffffff"],
+                    shapes: ["circle"],
+                    gravity: randomInRange(0.4, 0.6), // Random gravity for variation
+                    scalar: randomInRange(0.4, 1), // Random scalar for size variation
+                });
+
+                if (timeLeft > 0) {
+                    requestAnimationFrame(frame);
+                }
+            })();
+        });
+    </script>
+
+</body>
+</html>
