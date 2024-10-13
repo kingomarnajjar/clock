@@ -198,7 +198,7 @@
 
         // Snow effect on click
         document.body.addEventListener('click', (event) => {
-            const duration = 10 * 1000; // Reduced duration
+            const duration = 3 * 1000; // Reduced duration
             const animationEnd = Date.now() + duration;
 
             function randomInRange(min, max) {
@@ -207,11 +207,11 @@
 
             (function frame() {
                 const timeLeft = animationEnd - Date.now(),
-                      ticks = Math.max(100, 300 * (timeLeft / duration)); // Increased speed
+                      ticks = Math.max(50, 100 * (timeLeft / duration)); // Increased speed
 
                 // Create snow effect in a smaller area
-                const offsetX = randomInRange(-50, 50); // +/- 50 pixels horizontally
-                const offsetY = randomInRange(-20, 20); // +/- 20 pixels vertically
+                const offsetX = randomInRange(-10, 10); // +/- 50 pixels horizontally
+                const offsetY = randomInRange(-10, 10); // +/- 20 pixels vertically
 
                 confetti({
                     angle: randomInRange(55, 125), // Random angle for direction
